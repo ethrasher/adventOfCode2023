@@ -10,40 +10,27 @@ def partA(inputLines):
   current = 0
   for line in inputLines:
     num = ""
-    for i in range(len(line)):
-      if line[i].isnumeric():
-        num += line[i]
-        break
-    for i in range(len(line)-1,-1,-1):
-      if line[i].isnumeric():
-        num+=line[i]
-        break
+    i = 0
+    while (not line[i].isnumeric()):
+      i += 1
+    num += line[i]
+
+    i = len(line)-1
+    while (not line[i].isnumeric()):
+      i -= 1
+    num += line[i]
     current += int(num)
   return current
 
 def partB(inputLines):
-  current = 0
-  for line in inputLines:
-    line = line.replace("one", "o1e")
-    line = line.replace("two", "t2o")
-    line = line.replace("three", "t3e")
-    line = line.replace("four", "f4r")
-    line = line.replace("five", "f5e")
-    line = line.replace("six", "s6x")
-    line = line.replace("seven", "s7n")
-    line = line.replace("eight", "e8t")
-    line = line.replace("nine", "n9e")
-    num = ""
-    for i in range(len(line)):
-      if line[i].isnumeric():
-        num += line[i]
-        break
-    for i in range(len(line)-1,-1,-1):
-      if line[i].isnumeric():
-        num+=line[i]
-        break
-    current += int(num)
-  return current
+  for i in range(len(inputLines)):
+    line = inputLines[i]
+    spelled = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    replace = ["o1e", "t2o", "t3e", "f4r", "f5e", "s6x", "s7n", "e8t", "n9e"]
+    for j in range(len(spelled)):
+      line = line.replace(spelled[j], replace[j])
+    inputLines[i] = line
+  return partA(inputLines)
 
 input = readFile("input")
 # Part A Answer - 55130
